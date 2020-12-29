@@ -10,6 +10,10 @@ class MySQL {
             user: 'root_cfn',
             password: 'root1234',
             database: 'db_nodecfn'
+            // host     : 'localhost',
+            // user     : 'root',
+            // password : 'root',
+            // database : 'db_node'
         });
         this.conectarDB();
     }

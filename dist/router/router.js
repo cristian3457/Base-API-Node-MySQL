@@ -42,4 +42,71 @@ router.get('/heroes/:id', (req, res) => {
         }
     });
 });
+router.post('/heroes', (req, res) => {
+    const body = req.body;
+    const escapeNombre = mysql_1.default.instance.cnn.escape(body.nombre);
+    const escapePoder = mysql_1.default.instance.cnn.escape(body.poder);
+    const query = `INSERT INTO heroes(nombre,poder) VALUES (${escapeNombre},${escapePoder})`;
+    let datos = {
+        nombre: escapeNombre,
+        poder: escapePoder
+    };
+    mysql_1.default.ejecutarQuery(query, (err, heroe) => {
+        if (err) {
+            res.status(400).json({
+                ok: false,
+                error: err
+            });
+        }
+        else {
+            res.json({
+                ok: true,
+                heroe: datos
+            });
+        }
+    });
+});
+router.put('/heroes/:id', (req, res) => {
+    const body = req.body;
+    const id = req.params.id;
+    const escapeNombre = mysql_1.default.instance.cnn.escape(body.nombre);
+    const escapePoder = mysql_1.default.instance.cnn.escape(body.poder);
+    const query = `UPDATE heroes SET nombre = ${escapeNombre}, poder = ${escapePoder} WHERE id = ${id}`;
+    let datos = {
+        nombre: escapeNombre,
+        poder: escapePoder
+    };
+    mysql_1.default.ejecutarQuery(query, (err, heroe) => {
+        if (err) {
+            res.status(400).json({
+                ok: false,
+                error: err
+            });
+        }
+        else {
+            res.json({
+                ok: true,
+                heroe: datos
+            });
+        }
+    });
+});
+router.delete('/heroes/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `DELETE FROM heroes WHERE id = ${id}`;
+    mysql_1.default.ejecutarQuery(query, (err, heroe) => {
+        if (err) {
+            res.status(400).json({
+                ok: false,
+                error: err
+            });
+        }
+        else {
+            res.json({
+                ok: true,
+                heroe
+            });
+        }
+    });
+});
 exports.default = router;
