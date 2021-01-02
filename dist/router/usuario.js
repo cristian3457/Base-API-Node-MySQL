@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const mysql_1 = __importDefault(require("../mysql/mysql"));
 const router = express_1.Router();
-router.get('/usuarios', (req, res) => {
+router.get('/usuario', (req, res) => {
     const query = `SELECT * FROM usuarios`;
     mysql_1.default.ejecutarQuery(query, (err, usuarios) => {
         if (err) {
@@ -23,7 +23,7 @@ router.get('/usuarios', (req, res) => {
         }
     });
 });
-router.get('/usuarios/:id', (req, res) => {
+router.get('/usuario/:id', (req, res) => {
     const id = req.params.id;
     const escapeId = mysql_1.default.instance.cnn.escape(id);
     const query = `SELECT * FROM usuarios where id = ${escapeId}`;
@@ -42,7 +42,7 @@ router.get('/usuarios/:id', (req, res) => {
         }
     });
 });
-router.post('/usuarios', (req, res) => {
+router.post('/usuario', (req, res) => {
     const body = req.body;
     const escapeNombre = mysql_1.default.instance.cnn.escape(body.nombre);
     const escapeApellidos = mysql_1.default.instance.cnn.escape(body.apellidos);
@@ -77,7 +77,7 @@ router.post('/usuarios', (req, res) => {
         }
     });
 });
-router.put('/usuarios/:id', (req, res) => {
+router.put('/usuario/:id', (req, res) => {
     const body = req.body;
     const id = req.params.id;
     const escapeNombre = mysql_1.default.instance.cnn.escape(body.nombre);
@@ -113,7 +113,7 @@ router.put('/usuarios/:id', (req, res) => {
         }
     });
 });
-router.delete('/usuarios/:id', (req, res) => {
+router.delete('/usuario/:id', (req, res) => {
     const id = req.params.id;
     const query = `DELETE FROM usuarios WHERE id = ${id}`;
     mysql_1.default.ejecutarQuery(query, (err, heroe) => {

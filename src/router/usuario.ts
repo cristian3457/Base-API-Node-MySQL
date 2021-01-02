@@ -2,7 +2,7 @@ import {Router, Request, Response} from 'express';
 import MySQL from '../mysql/mysql';
 const router = Router();
 
-router.get('/usuarios',(req:Request,res:Response)=>{
+router.get('/usuario',(req:Request,res:Response)=>{
     
     const query = `SELECT * FROM usuarios`;
     
@@ -22,7 +22,7 @@ router.get('/usuarios',(req:Request,res:Response)=>{
     });
 });
 
-router.get('/usuarios/:id',(req:Request,res:Response)=>{
+router.get('/usuario/:id',(req:Request,res:Response)=>{
     const id = req.params.id;
     const escapeId = MySQL.instance.cnn.escape(id);
 
@@ -46,7 +46,7 @@ router.get('/usuarios/:id',(req:Request,res:Response)=>{
     });
 });
 
-router.post('/usuarios',(req:Request,res:Response)=>{
+router.post('/usuario',(req:Request,res:Response)=>{
 
     const body = req.body;
     const escapeNombre =MySQL.instance.cnn.escape(body.nombre);
@@ -85,7 +85,7 @@ router.post('/usuarios',(req:Request,res:Response)=>{
         }
     });
 });
-router.put('/usuarios/:id',(req:Request,res:Response)=>{
+router.put('/usuario/:id',(req:Request,res:Response)=>{
 
     const body = req.body;
     const id = req.params.id;
@@ -125,7 +125,7 @@ router.put('/usuarios/:id',(req:Request,res:Response)=>{
         }
     });
 });
-router.delete('/usuarios/:id',(req:Request,res:Response)=>{
+router.delete('/usuario/:id',(req:Request,res:Response)=>{
 
     const id = req.params.id;
     const query = `DELETE FROM usuarios WHERE id = ${id}`;
