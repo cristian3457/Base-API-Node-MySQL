@@ -50,14 +50,15 @@ router.post('/usuarios',(req:Request,res:Response)=>{
 
     const body = req.body;
     const escapeNombre =MySQL.instance.cnn.escape(body.nombre);
-    const escapeApellidos =MySQL.instance.cnn.escape(body.Apellidos);
+    const escapeApellidos =MySQL.instance.cnn.escape(body.apellidos);
     const escapeEmail =MySQL.instance.cnn.escape(body.email);
     const escapeEstado =MySQL.instance.cnn.escape(body.estado);
     const escapeRol =MySQL.instance.cnn.escape(body.rol);
     const escapeImg =MySQL.instance.cnn.escape(body.img);
+    const escapePassword =MySQL.instance.cnn.escape(body.password);
 
-    const query = `INSERT INTO usuarios(nombre,apellidos,email,estado,rol,img) VALUES 
-    (${escapeNombre},${escapeApellidos},${escapeEmail},${escapeEstado},${escapeRol},${escapeImg})`;
+    const query = `INSERT INTO usuarios(nombre,apellidos,email,estado,rol,img,password) VALUES 
+    (${escapeNombre},${escapeApellidos},${escapeEmail},${escapeEstado},${escapeRol},${escapeImg},${escapePassword})`;
 
     let datos = {
         nombre:escapeNombre,
@@ -65,7 +66,8 @@ router.post('/usuarios',(req:Request,res:Response)=>{
         email:escapeEmail,
         estado:escapeEstado,
         rol:escapeRol,
-        img:escapeImg
+        img:escapeImg,
+        password:escapePassword
     }
     MySQL.ejecutarQuery(query,(err:any, heroe:object[])=>{
         
@@ -88,14 +90,15 @@ router.put('/usuarios/:id',(req:Request,res:Response)=>{
     const body = req.body;
     const id = req.params.id;
     const escapeNombre =MySQL.instance.cnn.escape(body.nombre);
-    const escapeApellidos =MySQL.instance.cnn.escape(body.Apellidos);
+    const escapeApellidos =MySQL.instance.cnn.escape(body.apellidos);
     const escapeEmail =MySQL.instance.cnn.escape(body.email);
     const escapeEstado =MySQL.instance.cnn.escape(body.estado);
     const escapeRol =MySQL.instance.cnn.escape(body.rol);
     const escapeImg =MySQL.instance.cnn.escape(body.img);
+    const escapePassword =MySQL.instance.cnn.escape(body.password);
 
     const query = `UPDATE usuarios SET nombre = ${escapeNombre}, apellidos = ${escapeApellidos}, email =  ${escapeEmail},
-    estado =  ${escapeEstado}, rol =  ${escapeRol}, img =  ${escapeImg} WHERE id = ${id}`;
+    estado =  ${escapeEstado}, rol =  ${escapeRol}, img =  ${escapePassword},img =  ${escapePassword} WHERE id = ${id}`;
 
     let datos = {
         nombre:escapeNombre,
@@ -103,7 +106,8 @@ router.put('/usuarios/:id',(req:Request,res:Response)=>{
         email:escapeEmail,
         estado:escapeEstado,
         rol:escapeRol,
-        img:escapeImg
+        img:escapeImg,
+        password:escapePassword
     }
     MySQL.ejecutarQuery(query,(err:any, heroe:object[])=>{
         
